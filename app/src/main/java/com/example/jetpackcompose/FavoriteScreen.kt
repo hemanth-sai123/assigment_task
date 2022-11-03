@@ -45,7 +45,6 @@ class FavoriteScreen : ComponentActivity() {
 @ExperimentalFoundationApi
 @Composable
 fun GridFavorite(list: List<Movies>,mContext: Context){
-    //val numbers = (0..20).toList()
 
     LazyVerticalGrid(
         cells = GridCells.Fixed(2)

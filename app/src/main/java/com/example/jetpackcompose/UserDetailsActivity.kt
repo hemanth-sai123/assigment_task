@@ -22,7 +22,6 @@ class UserDetailsActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //Text("UserDetailsActivity")
             UserDetails(this)
         }
 

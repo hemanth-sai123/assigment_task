@@ -14,17 +14,10 @@ interface MovieDao {
     @Query("SELECT * FROM movie_table")
     fun getMovies(): List<Movies>
 
-//    @Query("SELECT * FROM $BOOK_TABLE WHERE id = :id")
-//    fun getBook(id: Int): Flow<Book>
 
     @Insert(onConflict =IGNORE)
     fun addMovie(b: Movies)
 
-//    @Update
-//    fun updateBook(b: RewardUser)
-//
-//    @Delete
-//    fun deleteBook(b: RewardUser)
 }
 
 
@@ -33,9 +26,6 @@ interface RewardDao {
 
     @Query("SELECT * FROM reward_table")
     fun getAllData(): LiveData<List<RewardUser>>
-
-//    @Query("SELECT * FROM $BOOK_TABLE WHERE id = :id")
-//    fun getBook(id: Int): Flow<Book>
 
     @Insert(onConflict =IGNORE)
     fun addReward(b: RewardUser)

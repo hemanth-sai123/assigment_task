@@ -1,11 +1,8 @@
 package com.example.jetpackcompose
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
@@ -22,12 +19,10 @@ import com.example.jetpackcompose.view_model.RewardListViewModel
 
 import androidx.compose.foundation.lazy.LazyColumn
 
-import androidx.compose.foundation.lazy.items
-
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -37,7 +32,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.*
 import com.example.jetpackcompose.model.RewardUser
-import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
     @ExperimentalUnitApi
@@ -54,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
                 MainContent()
                 list?.let {
-                    RecycleView(this@MainActivity,LocalContext.current.applicationContext as Application,
+                    RecycleView(this@MainActivity,
                         it
                     )
                 }
@@ -67,10 +61,6 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainContent() {
 
-        // Create a boolean variable
-        // to store the display menu state
-        var mDisplayMenu by remember { mutableStateOf(false) }
-
         // fetching local context
         val mContext = LocalContext.current
 
@@ -81,41 +71,14 @@ class MainActivity : ComponentActivity() {
 
                 // Creating Icon button favorites, on click
                 // would create a Toast message
-                IconButton(onClick = { mContext.startActivity(Intent(mContext, CreateActivity::class.java)) }) {
-                    Icon(Icons.Default.Add, "")
+                IconButton(onClick = { mContext.startActivity(Intent(mContext, MovieListActivity::class.java)) }) {
+                    Icon(Icons.Default.Home, "")
                 }
-
-//                // Creating Icon button for dropdown menu
-//                IconButton(onClick = { mDisplayMenu = !mDisplayMenu }) {
-//                    Icon(Icons.Default.MoreVert, "")
-//                }
-
-//                // Creating a dropdown menu
-//                DropdownMenu(
-//                    expanded = mDisplayMenu,
-//                    onDismissRequest = { mDisplayMenu = false }
-//                ) {
-//
-//                    // Creating dropdown menu item, on click
-//                    // would create a Toast message
-//                    DropdownMenuItem(onClick = { Toast.makeText(mContext, "Settings", Toast.LENGTH_SHORT).show() }) {
-//                        Text(text = "Settings")
-//                    }
-//
-//                    // Creating dropdown menu item, on click
-//                    // would create a Toast message
-//                    DropdownMenuItem(onClick = { Toast.makeText(mContext, "Logout", Toast.LENGTH_SHORT).show() }) {
-//                        Text(text = "Logout")
-//                    }
-//                }
             }
         )
     }
 }
-@Composable
-fun rt(){
 
-}
 
 @ExperimentalUnitApi
 @Composable
@@ -142,13 +105,7 @@ mContext:Context
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-//                Image(
-//                    painter = painterResource(id = image),
-//                    contentDescription = null,
-//                    modifier = Modifier.size(130.dp)
-//                        .padding(8.dp),
-//                    contentScale = ContentScale.Fit,
-//                )
+
                 Column(Modifier.padding(8.dp)) {
                     Text(
                         text = item.userName,
@@ -163,35 +120,15 @@ mContext:Context
             }
         }
 
-//    Row(
-//        modifier= Modifier
-//            .fillMaxWidth()
-//            .fillMaxHeight().clickable {
-//                var intent =Intent(mContext,UserDetailsActivity::class.java)
-//                //intent.putExtra("position",index)
-//                RewardDataObject.rewardData=item
-//                mContext.startActivity(intent)
-//
-//            },
-//        verticalAlignment = Alignment.CenterVertically,
-//        horizontalArrangement = Arrangement.Start,
-//    ) {
-//
-//        Text(
-//            text = item.userName,modifier = Modifier.wrapContentSize(),fontSize = TextUnit(value = 16f,type = TextUnitType.Sp)
-//        )
-//
-//    }
+
 }
 
 @ExperimentalUnitApi
 @ExperimentalMaterialApi
 @Composable
-fun RecycleView(a: MainActivity, application: Application,list: List<RewardUser>){
+fun RecycleView(activity: MainActivity,list: List<RewardUser>){
 
 
-    Log.d("jkkjsjdk ","kd "+list.toString())
-    //rt()
     LazyColumn{
         list?.size?.let {
             items(it){
@@ -200,7 +137,7 @@ fun RecycleView(a: MainActivity, application: Application,list: List<RewardUser>
 
                 if (dismissState.isDismissed(DismissDirection.EndToStart)) {
 
-                    Log.d("dismissed ","")
+
 
                 }
                 SwipeToDismiss(
@@ -229,9 +166,9 @@ fun RecycleView(a: MainActivity, application: Application,list: List<RewardUser>
 
                         Box(
                             Modifier.clickable {
-                                Log.d("ll;;ls;sdl; "," "+it.toString())
+
                                 list!!.toMutableList().removeAt(it)
-                                Log.d("ll;;ls;sdl; "," "+list!!.size.toString())
+
                             }
                                 .fillMaxSize()
                                 .background(color)
@@ -256,7 +193,7 @@ fun RecycleView(a: MainActivity, application: Application,list: List<RewardUser>
 
                                 .align(alignment = Alignment.CenterVertically)
                         ) {
-                            setUpRow(list!![it],a)
+                            setUpRow(list!![it],activity)
                         }
                     }
                 )
@@ -264,45 +201,8 @@ fun RecycleView(a: MainActivity, application: Application,list: List<RewardUser>
                 Divider(Modifier.fillMaxWidth(), Color.DarkGray)
 
 
-//                Box(
-//                    modifier = Modifier
-//                        .height(70.dp)
-//                        .background(
-//                            color = Color.Green
-//                        ).padding(5.dp)
-//                ) {
-////                    Row(modifier = Modifier
-////                        .fillParentMaxWidth()
-////
-////                    ) {
-////                        Column() {
-////                            Text(text = items!![it].userName.toString(), fontSize = 20.sp)
-////                            Text(text = items!![it].userID)
-////                        }
-////                    }
-//////                    Card(modifier = Modifier.height(100.dp)) {
-//////
-//////                    }
-//                }
-
             }
         }
-//        Lazycolumn{
-//
-//        }
-//        itemsIndexed(
-//            vm.users
-//        ){
-//                index,string ->
-//            Text(string)
-//        }
 
-//        items(1) {
-//            Column {
-//                Text(it.name)
-//                Text("${it.id}")
-//            }
-//
-//        }
     }
 }

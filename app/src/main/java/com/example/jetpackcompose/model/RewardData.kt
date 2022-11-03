@@ -7,9 +7,6 @@ data class RewardData(
     val userID:String, val userName:String
 )
 
-
-
-
 @Entity(tableName = "reward_table")
 data class RewardUser(
     @PrimaryKey()
@@ -24,10 +21,7 @@ data class RewardUser(
 
     @ColumnInfo(name="userRewards")
     val rewardCategoryServices: List<RewardCategoryServices>?,
-   // @ColumnInfo(name="author")
-//    val author: String,
-//    @ColumnInfo(name="userName")
-//    val userName: String,
+
 
 )
 
@@ -44,9 +38,6 @@ data class RewardCategoryServices(
     val serviceRewardTotal: Int,
     @ColumnInfo(name="serviceFormula")
     val serviceFormula: String,
-    // @ColumnInfo(name="author")
-//    val author: String,
-//    @ColumnInfo(name="userName")
-//    val userName: String,
+
 
 )

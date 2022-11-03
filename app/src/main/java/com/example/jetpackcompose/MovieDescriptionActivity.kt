@@ -31,16 +31,6 @@ class MovieDescriptionActivity: ComponentActivity() {
                 TopAppBar(
                     title = { Text("Description Screen", color = Color.White) })
 
-//                when(intent.getStringExtra("Status")){
-//                    "Favorite" ->{
-//                        var list =MoviesList.totalList
-//                        list?.let { MovieDescription(it) }
-//
-//                    }else->{
-//                    var list =MoviesList.totalList
-//                    list?.let { MovieDescription(it) }
-//                    }
-//                }
                 var list =MoviesList.totalList
                 list?.let { MovieDescription(it) }
 

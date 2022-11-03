@@ -22,7 +22,6 @@ class RewardActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //Text("UserDetailsActivity")
             RewardDetals()
         }
 

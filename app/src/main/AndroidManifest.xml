@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jetpackcompose" >
-        <activity android:name=".CreateActivity"/>
+        <activity android:name=".MovieListActivity"/>
         <activity android:name=".UserDetailsActivity"/>
         <activity android:name=".RewardActivity"/>
         <activity android:name=".FavoriteScreen"/>

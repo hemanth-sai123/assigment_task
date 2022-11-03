@@ -13,19 +13,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RewardListViewModel(application: Application):AndroidViewModel(application) {
-    private val _users = mutableStateListOf<RewardData>()
 
     val repository:RewardRepository
     private var reallAll:LiveData<List<RewardUser>>
     private lateinit var moviesListLiveData:MutableLiveData<List<Movies>>
     init {
-        val no = RoomDataBase.getDatabase(application).rewardDao()
+        val rewardDao = RoomDataBase.getDatabase(application).rewardDao()
         val movieDao = RoomDataBase.getDatabase(application).moviesDao()
-        repository = RewardRepository(no,movieDao)
+        repository = RewardRepository(rewardDao,movieDao)
         addReward()
         moviesListLiveData =MutableLiveData()
         reallAll =repository.getRewardFromRoom()
-        Log.d("dkslsdlsskl ","  "+reallAll.value.toString())
+
     }
 
     fun getRewardObservable():  LiveData<List<RewardUser>>{
@@ -61,24 +60,15 @@ class RewardListViewModel(application: Application):AndroidViewModel(application
                 ))
 
 
-                Log.d("kdslklsdklsdkl "," "+"success")
+
             }
             catch (err:Throwable){
-                Log.d("kdslklsdklsdkl "," "+err.toString())
+
             }
         }
     }
 
-    val users: List<RewardData>
-        get() = _users
 
-
-    fun addUser(user: RewardUser) {
-//        bookDao.addBook(user)
-//
-//        bookDao.
-       // _users.add(user)
-    }
 
     fun getMovieResults() {
        // viewModelScope.launch {

@@ -19,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -36,7 +35,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.jetpackcompose.model.Movies
 import com.example.jetpackcompose.view_model.RewardListViewModel
 
-class CreateActivity : ComponentActivity() {
+class MovieListActivity : ComponentActivity() {
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,7 @@ class CreateActivity : ComponentActivity() {
                         // would create a Toast message
                         IconButton(onClick = {
                             MoviesList.favorite=arrayList
-                            startActivity(Intent(this@CreateActivity, FavoriteScreen::class.java))
+                            startActivity(Intent(this@MovieListActivity, FavoriteScreen::class.java))
                          }) {
                             Icon(Icons.Default.Favorite, "")
                         }
@@ -63,7 +62,7 @@ class CreateActivity : ComponentActivity() {
 
                 val list by vm.getAllMoviesObservable().observeAsState()
 
-                list?.let { Grid(it,arrayList,this@CreateActivity) }
+                list?.let { Grid(it,arrayList,this@MovieListActivity) }
             }
         }
 
@@ -108,8 +107,7 @@ fun Grid(list: List<Movies>, arrayList: ArrayList<Movies>,mContext:Context){
                     //intent.putExtra("Status","Favorite")
                     MoviesList.totalList=list[it]
                     mContext.startActivity(intent)
-//                    MoviesList.favorite =arrayList
-//                    mContext.startActivity(Intent(mContext, FavoriteScreen::class.java))
+
                 },
                 onLongClick = {
                     isSelected = !isSelected
@@ -120,10 +118,7 @@ fun Grid(list: List<Movies>, arrayList: ArrayList<Movies>,mContext:Context){
             ).fillMaxSize(0.5f)
                 .padding(16.dp)){
                 ImageCard(painter = painter, contentDescription = descrption?:"" , title = title?:"",isSelected)
-//            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                Text(text = "Number")
-//                Text(text = "  $it",)
-//            }
+
         }
     }}
 }
@@ -155,7 +150,6 @@ fun ImageCard(
             modifier =Modifier.height(200.dp)
         ) {
 
-            //androidx.compose.foundation.Image(painter = , contentDescription = )
 
             Image(
                 painter =painter,
@@ -172,10 +166,7 @@ fun ImageCard(
                             Color.Transparent,
                             Color.Black
                         ),
-//                        colors = [
-//                            Color.Transparent,
-//                        Color.Black
-//                        ],
+
                         startY = 300f
                     )
                 )

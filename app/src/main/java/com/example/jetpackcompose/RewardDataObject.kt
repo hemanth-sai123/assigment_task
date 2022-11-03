@@ -11,3 +11,7 @@ object MoviesList {
     var favorite: List<Movies>?=null
     var totalList: Movies?=null
 }
+
+object ApiKey{
+    val key:String="0d2ca8a57687b6cc7527daba6d8e441f"
+}
